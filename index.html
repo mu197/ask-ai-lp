@@ -1,624 +1,618 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Claudeを使った業務効率化のご紹介 | 株式会社アスク</title>
-<meta name="robots" content="noindex, nofollow">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --green:   #3a6b3a;
-    --green-mid: #4e8c4e;
-    --green-light: #e8f2e8;
-    --green-pale:  #f3f8f3;
-    --brown:   #7a5c2e;
-    --brown-light: #f7f2eb;
-    --white:   #ffffff;
-    --off-white: #fafafa;
-    --text:    #2d3a2d;
-    --text-mid: #5a6a5a;
-    --text-light: #8a9a8a;
-    --border:  #dde8dd;
-    --gold:    #b8943a;
-  }
-
-  html, body {
-    height: auto !important;
-    min-height: 100% !important;
-    overflow: visible !important;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Noto Sans JP', sans-serif;
-    background: var(--off-white);
-    color: var(--text);
-    line-height: 1.8;
-    font-size: 15px;
-    overflow-x: hidden;
-  }
-
-  a { color: inherit; }
-
-  /* ===== HEADER ===== */
-  .header {
-    background: var(--white);
-    border-bottom: 1px solid var(--border);
-    padding: 20px 40px;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .header-logo {
-    width: 36px; height: 36px;
-    background: var(--green);
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 18px;
-  }
-  .header-name {
-    font-size: 14px;
-    color: var(--green);
-    font-weight: 700;
-    letter-spacing: 1px;
-  }
-  .header-sub {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-left: 4px;
-  }
-
-  /* ===== HERO ===== */
-  .hero {
-    background: linear-gradient(180deg, var(--green-light) 0%, var(--white) 100%);
-    padding: 64px 40px 56px;
-    text-align: center;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero-tag {
-    display: inline-block;
-    background: var(--white);
-    border: 1px solid var(--green-mid);
-    color: var(--green);
-    font-size: 12px;
-    font-weight: 500;
-    padding: 5px 16px;
-    border-radius: 20px;
-    margin-bottom: 28px;
-    letter-spacing: 1px;
-  }
-  .hero h1 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(22px, 4vw, 34px);
-    color: var(--text);
-    font-weight: 700;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-  .hero h1 span { color: var(--green); }
-  .hero-lead {
-    font-size: 15px;
-    color: var(--text-mid);
-    line-height: 2;
-    max-width: 560px;
-    margin: 0 auto 12px;
-  }
-  .hero-note {
-    font-size: 13px;
-    color: var(--text-light);
-    margin-top: 8px;
-  }
-
-  /* ===== SECTION ===== */
-  .section {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 60px 40px;
-  }
-  .section-label {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--green-mid);
-    font-weight: 500;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-  .section-title {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(18px, 2.5vw, 24px);
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 8px;
-    line-height: 1.5;
-  }
-  .section-desc {
-    font-size: 14px;
-    color: var(--text-mid);
-    margin-bottom: 36px;
-    line-height: 1.9;
-  }
-  .divider {
-    border: none;
-    border-top: 1px solid var(--border);
-    margin: 0;
-  }
-
-  /* ===== CASES ===== */
-  .case-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-  .case-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 28px 32px;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    gap: 20px;
-    align-items: start;
-    transition: box-shadow 0.2s;
-  }
-  .case-card:hover { box-shadow: 0 4px 16px rgba(58,107,58,0.08); }
-  .case-num {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    background: var(--green-light);
-    color: var(--green);
-    font-weight: 700;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    margin-top: 2px;
-  }
-  .case-body { flex: 1; }
-  .case-title {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-  .case-time {
-    display: inline-block;
-    font-size: 12px;
-    color: var(--green);
-    background: var(--green-light);
-    padding: 2px 10px;
-    border-radius: 10px;
-    font-weight: 500;
-    margin-bottom: 12px;
-  }
-  .case-compare {
-    display: flex;
-    gap: 10px;
-    align-items: flex-start;
-    margin-bottom: 12px;
-  }
-  .case-before, .case-after {
-    flex: 1;
-    font-size: 13px;
-    line-height: 1.8;
-    padding: 10px 14px;
-    border-radius: 6px;
-  }
-  .case-before {
-    background: #fdf6f0;
-    color: #7a5c2e;
-    border: 1px solid #ecddc8;
-  }
-  .case-after {
-    background: var(--green-pale);
-    color: var(--green);
-    border: 1px solid #c8dcc8;
-  }
-  .case-arrow {
-    color: var(--text-light);
-    font-size: 18px;
-    padding-top: 10px;
-    flex-shrink: 0;
-  }
-  .case-result {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.8;
-  }
-  .case-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    background: var(--green-light);
-    color: var(--green);
-    text-decoration: none;
-    font-size: 13px;
-    font-weight: 500;
-    padding: 8px 16px;
-    border-radius: 6px;
-    flex-shrink: 0;
-    margin-top: 2px;
-    transition: background 0.2s;
-    align-self: start;
-    white-space: nowrap;
-  }
-  .case-link:hover { background: #d0e6d0; }
-
-  /* ===== CLAUDE INTRO ===== */
-  .claude-section {
-    background: var(--white);
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-  }
-  .claude-inner {
-    max-width: 860px;
-    margin: 0 auto;
-    padding: 60px 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 48px;
-    align-items: center;
-  }
-  .claude-text h2 {
-    font-family: 'Noto Serif JP', serif;
-    font-size: clamp(18px, 2.5vw, 24px);
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 16px;
-    line-height: 1.5;
-  }
-  .claude-text p {
-    font-size: 14px;
-    color: var(--text-mid);
-    line-height: 2;
-    margin-bottom: 12px;
-  }
-  .claude-features {
-    list-style: none;
-    margin: 20px 0 28px;
-  }
-  .claude-features li {
-    font-size: 13px;
-    color: var(--text-mid);
-    padding: 7px 0;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  .claude-features li::before {
-    content: '✓';
-    color: var(--green-mid);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 1px;
-  }
-  .claude-btn {
-    display: inline-block;
-    background: var(--green);
-    color: var(--white);
-    text-decoration: none;
-    padding: 13px 32px;
-    border-radius: 6px;
-    font-size: 14px;
-    font-weight: 700;
-    transition: background 0.2s, transform 0.15s;
-    letter-spacing: 0.5px;
-  }
-  .claude-btn:hover {
-    background: var(--green-mid);
-    transform: translateY(-1px);
-  }
-  .claude-btn-note {
-    font-size: 12px;
-    color: var(--text-light);
-    margin-top: 10px;
-  }
-  .claude-visual {
-    background: var(--green-pale);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 28px;
-  }
-  .chat-bubble {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 8px 8px 8px 2px;
-    padding: 12px 16px;
-    font-size: 13px;
-    color: var(--text);
-    margin-bottom: 12px;
-    line-height: 1.7;
-  }
-  .chat-bubble.user {
-    background: var(--green);
-    color: var(--white);
-    border: none;
-    border-radius: 8px 8px 2px 8px;
-    margin-left: 20px;
-  }
-  .chat-label {
-    font-size: 11px;
-    color: var(--text-light);
-    margin-bottom: 4px;
-  }
-  .chat-label.right { text-align: right; margin-right: 4px; }
-
-  /* ===== FOOTER NOTE ===== */
-  .footer-note {
-    background: var(--green-pale);
-    border-top: 1px solid var(--border);
-    padding: 32px 40px;
-    text-align: center;
-  }
-  .footer-note p {
-    font-size: 13px;
-    color: var(--text-mid);
-    line-height: 1.9;
-    max-width: 600px;
-    margin: 0 auto;
-  }
-  .footer-note p + p { margin-top: 8px; }
-  .footer {
-    background: var(--green);
-    padding: 18px 40px;
-    text-align: center;
-  }
-  .footer p { font-size: 12px; color: rgba(255,255,255,0.6); }
-
-  /* ===== RESPONSIVE ===== */
-  @media (max-width: 680px) {
-    .header { padding: 16px 20px; }
-    .hero { padding: 40px 20px 36px; }
-    .section { padding: 40px 20px; }
-    .case-card {
-      grid-template-columns: 1fr;
-      padding: 20px;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ミズナラバイオリン | Mizunara Violin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@300;400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --bg-soft: #141414;
+      --bg-card: #1a1a1a;
+      --gold: #c9a961;
+      --gold-bright: #e0c47e;
+      --gold-dark: #8a7341;
+      --ivory: #f5efe0;
+      --text: #d8d2c4;
+      --text-mute: #8a8578;
+      --line: #2a2620;
     }
-    .case-num { margin-bottom: 4px; }
-    .case-link {
-      display: inline-flex;
-      margin-top: 12px;
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Noto Serif JP', 'Hiragino Mincho ProN', 'Yu Mincho', serif;
+      font-weight: 300;
+      line-height: 1.9;
+      overflow-x: hidden;
     }
-    .case-compare { flex-direction: column; gap: 8px; }
-    .case-arrow { display: none; }
-    .claude-inner {
-      grid-template-columns: 1fr;
-      gap: 28px;
-      padding: 40px 20px;
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      padding: 24px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0) 100%);
+      backdrop-filter: blur(8px);
     }
-    .footer-note { padding: 28px 20px; }
-    .footer { padding: 16px 20px; }
-    .hero h1 { font-size: 20px; }
-    .section-title { font-size: 18px; }
-    .chat-bubble { font-size: 12px; }
-  }
-</style>
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      letter-spacing: 0.3em;
+      color: var(--gold);
+      font-weight: 400;
+    }
+    .nav-logo span { color: var(--ivory); font-size: 11px; display: block; letter-spacing: 0.4em; margin-top: 2px; }
+    .nav-links { display: flex; gap: 36px; list-style: none; }
+    .nav-links a {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 12px;
+      letter-spacing: 0.3em;
+      font-family: 'Cormorant Garamond', serif;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: #0a0a0a;
+    }
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+    }
+    .hero-bg img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at center, rgba(10,10,10,0.3) 0%, rgba(10,10,10,0.75) 100%),
+        linear-gradient(180deg, rgba(10,10,10,0.5) 0%, rgba(10,10,10,0.2) 50%, rgba(10,10,10,0.95) 100%);
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(92deg,
+          transparent 0px,
+          rgba(201, 169, 97, 0.015) 1px,
+          transparent 3px,
+          rgba(201, 169, 97, 0.025) 4px,
+          transparent 8px);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .hero-content { text-align: center; z-index: 2; padding: 0 40px; position: relative; }
+    .hero-mark { width: 60px; height: 1px; background: var(--gold); margin: 0 auto 40px; }
+    .hero-jp-small { color: var(--gold); font-size: 13px; letter-spacing: 0.6em; margin-bottom: 32px; }
+    .hero-en {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(48px, 7vw, 96px);
+      color: var(--ivory);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      text-shadow: 0 2px 30px rgba(0,0,0,0.8);
+    }
+    .hero-en .accent { color: var(--gold); font-style: italic; }
+    .hero-jp { font-size: clamp(18px, 2vw, 24px); color: var(--ivory); letter-spacing: 0.4em; margin-bottom: 48px; font-weight: 300; text-shadow: 0 2px 20px rgba(0,0,0,0.8); }
+    .hero-tagline { color: var(--text-mute); font-size: 14px; letter-spacing: 0.3em; font-family: 'Cormorant Garamond', serif; font-style: italic; }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: var(--gold);
+      font-size: 10px;
+      letter-spacing: 0.4em;
+      font-family: 'Cormorant Garamond', serif;
+      animation: fadeUpDown 2.5s ease-in-out infinite;
+      z-index: 2;
+    }
+    .scroll-indicator::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(180deg, var(--gold), transparent);
+      margin: 12px auto 0;
+    }
+    @keyframes fadeUpDown {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, 0); }
+      50% { opacity: 1; transform: translate(-50%, 8px); }
+    }
+    section { padding: 140px 60px; position: relative; }
+    .container { max-width: 1200px; margin: 0 auto; }
+    .section-label {
+      color: var(--gold);
+      font-size: 11px;
+      letter-spacing: 0.5em;
+      font-family: 'Cormorant Garamond', serif;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .section-label::before { content: ''; width: 30px; height: 1px; background: var(--gold); }
+    .section-title {
+      font-size: clamp(32px, 4vw, 48px);
+      color: var(--ivory);
+      font-weight: 300;
+      letter-spacing: 0.15em;
+      margin-bottom: 60px;
+      line-height: 1.4;
+    }
+    .section-title .en {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 0.4em;
+      margin-top: 16px;
+      font-style: italic;
+    }
+    .story { background: var(--bg); }
+    .story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+    .story-text p { margin-bottom: 24px; color: var(--text); font-size: 16px; line-height: 2; }
+    .story-text p:first-of-type::first-letter {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 56px;
+      color: var(--gold);
+      float: left;
+      line-height: 1;
+      padding-right: 12px;
+      padding-top: 6px;
+    }
+    .story-visual {
+      position: relative;
+      aspect-ratio: 3/4;
+      background: linear-gradient(135deg, #2a1f15 0%, #1a1410 100%);
+      border: 1px solid var(--line);
+      overflow: hidden;
+    }
+    .story-visual img { width: 100%; height: 100%; object-fit: cover; object-position: center; display: block; }
+    .story-visual::after {
+      content: '';
+      position: absolute;
+      inset: 12px;
+      border: 1px solid var(--gold-dark);
+      pointer-events: none;
+      z-index: 2;
+    }
+    .mizunara { background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%); }
+    .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 60px; }
+    .feature-card {
+      padding: 48px 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      position: relative;
+      transition: all 0.5s;
+    }
+    .feature-card:hover { border-color: var(--gold-dark); transform: translateY(-4px); }
+    .feature-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 30px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .feature-num { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 14px; letter-spacing: 0.3em; margin-bottom: 24px; }
+    .feature-title { color: var(--ivory); font-size: 22px; font-weight: 400; letter-spacing: 0.15em; margin-bottom: 20px; line-height: 1.5; }
+    .feature-desc { color: var(--text); font-size: 14px; line-height: 1.9; }
+    .process { background: var(--bg); }
+    .process-list { margin-top: 80px; }
+    .process-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 2fr;
+      gap: 60px;
+      padding: 48px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+    }
+    .process-item:last-child { border-bottom: none; }
+    .process-num { font-family: 'Cormorant Garamond', serif; font-size: 64px; color: var(--gold); font-weight: 300; line-height: 1; font-style: italic; }
+    .process-name { color: var(--ivory); font-size: 22px; font-weight: 400; letter-spacing: 0.15em; line-height: 1.5; }
+    .process-name .en {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 13px;
+      color: var(--gold);
+      letter-spacing: 0.3em;
+      margin-top: 8px;
+      font-style: italic;
+    }
+    .process-desc { color: var(--text); font-size: 15px; line-height: 2; }
+    .producer { background: linear-gradient(180deg, var(--bg) 0%, #100c08 100%); }
+    .producer-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 80px; align-items: center; }
+    .producer-image {
+      aspect-ratio: 4/3;
+      background: linear-gradient(135deg, #1f1812 0%, #0f0c08 100%);
+      border: 1px solid var(--line);
+      position: relative;
+      overflow: hidden;
+    }
+    .producer-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
+    .producer-image::after { content: ''; position: absolute; inset: 12px; border: 1px solid var(--gold-dark); pointer-events: none; z-index: 2; }
+    .producer-role { color: var(--text-mute); font-size: 12px; letter-spacing: 0.4em; font-family: 'Cormorant Garamond', serif; margin-bottom: 32px; }
+    .producer-name { font-family: 'Cormorant Garamond', serif; font-size: 48px; color: var(--ivory); font-weight: 300; letter-spacing: 0.1em; margin-bottom: 12px; font-style: italic; }
+    .producer-name-jp { color: var(--gold); font-size: 16px; letter-spacing: 0.5em; margin-bottom: 40px; }
+    .producer-bio p { color: var(--text); margin-bottom: 20px; line-height: 2; }
+    .producer-credentials {
+      margin-top: 40px;
+      padding-top: 32px;
+      border-top: 1px solid var(--line);
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+    .credential-item { color: var(--text-mute); font-size: 13px; }
+    .credential-label { color: var(--gold); font-size: 11px; letter-spacing: 0.3em; font-family: 'Cormorant Garamond', serif; margin-bottom: 8px; }
+    .voices { background: var(--bg); }
+    .voices-intro { max-width: 700px; color: var(--text); line-height: 2; margin-bottom: 80px; font-size: 16px; }
+    .video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 60px 40px; }
+    .video-frame {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #000;
+      border: 1px solid var(--line);
+      overflow: hidden;
+      transition: all 0.4s;
+    }
+    .video-frame:hover { border-color: var(--gold-dark); transform: translateY(-2px); }
+    .video-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .video-meta { margin-top: 24px; padding-left: 20px; border-left: 1px solid var(--gold-dark); }
+    .video-num { font-family: 'Cormorant Garamond', serif; color: var(--gold); font-size: 12px; letter-spacing: 0.3em; font-style: italic; margin-bottom: 8px; }
+    .video-title { color: var(--ivory); font-size: 17px; letter-spacing: 0.1em; line-height: 1.6; margin-bottom: 8px; }
+    .video-sub { color: var(--text-mute); font-size: 13px; letter-spacing: 0.15em; margin-bottom: 14px; }
+    .video-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--gold); text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 12px; letter-spacing: 0.25em; font-style: italic;
+      transition: color 0.3s;
+    }
+    .video-link:hover { color: var(--gold-bright); }
+    .video-link::after { content: '\2192'; font-style: normal; transition: transform 0.3s; }
+    .video-link:hover::after { transform: translateX(4px); }
+    .stats { background: linear-gradient(180deg, var(--bg) 0%, #100c08 100%); padding: 100px 60px; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; max-width: 1200px; margin: 0 auto; }
+    .stat-item { text-align: center; border-right: 1px solid var(--line); padding: 0 20px; }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Cormorant Garamond', serif; font-size: 56px; color: var(--gold); font-weight: 300; line-height: 1; font-style: italic; }
+    .stat-num .unit { font-size: 18px; color: var(--ivory); margin-left: 4px; }
+    .stat-label { color: var(--text-mute); font-size: 12px; letter-spacing: 0.3em; margin-top: 16px; }
+    .contact { background: var(--bg); text-align: center; }
+    .contact-message { max-width: 600px; margin: 0 auto 60px; color: var(--text); font-size: 16px; line-height: 2; }
+    .contact-button {
+      display: inline-block;
+      padding: 20px 64px;
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      text-decoration: none;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.4em;
+      transition: all 0.4s;
+      background: transparent;
+      cursor: pointer;
+    }
+    .contact-button:hover { background: var(--gold); color: var(--bg); }
+    footer { background: #050505; padding: 60px; border-top: 1px solid var(--line); text-align: center; }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 18px; letter-spacing: 0.4em; color: var(--gold); margin-bottom: 12px; }
+    .footer-org { color: var(--text-mute); font-size: 12px; letter-spacing: 0.2em; margin-bottom: 24px; }
+    .footer-copy { color: var(--text-mute); font-size: 11px; letter-spacing: 0.2em; font-family: 'Cormorant Garamond', serif; }
+    .fade-in { opacity: 0; transform: translateY(40px); transition: opacity 1.2s ease, transform 1.2s ease; }
+    .fade-in.visible { opacity: 1; transform: translateY(0); }
+    @media (max-width: 900px) {
+      nav { padding: 20px 24px; }
+      .nav-links { display: none; }
+      section { padding: 80px 24px; }
+      .story-grid, .producer-grid { grid-template-columns: 1fr; gap: 40px; }
+      .features-grid, .video-grid { grid-template-columns: 1fr; gap: 40px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--line); padding-bottom: 24px; }
+      .process-item { grid-template-columns: 1fr; gap: 16px; }
+      .process-num { font-size: 48px; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header class="header">
-  <div class="header-logo">🌾</div>
-  <div>
-    <span class="header-name">株式会社アスク</span>
-    <span class="header-sub">社内共有</span>
+<nav>
+  <div class="nav-logo">
+    MIZUNARA
+    <span>VIOLIN</span>
   </div>
-</header>
+  <ul class="nav-links">
+    <li><a href="#story">STORY</a></li>
+    <li><a href="#mizunara">MIZUNARA</a></li>
+    <li><a href="#process">PROCESS</a></li>
+    <li><a href="#producer">PRODUCER</a></li>
+    <li><a href="#voices">VOICES</a></li>
+    <li><a href="#contact">CONTACT</a></li>
+  </ul>
+</nav>
 
-<!-- HERO -->
 <section class="hero">
-  <span class="hero-tag">社内向け情報共有</span>
-  <h1>
-    ちょっとした作業を<span>Claude</span>に任せて、<br>
-    大事な仕事に集中できる時間をつくる。
-  </h1>
-  <p class="hero-lead">
-    次世代AI「Claude（クロード）」を使うと、<br>
-    毎日の繰り返し作業が大幅に短くなります。<br>
-    アスク社内でも実際に活用していますので、ご参考にどうぞ。
-  </p>
-  <p class="hero-note">※ このページ自体も Claude を使って作成しています</p>
-</section>
-
-<hr class="divider">
-
-<!-- 社内活用事例 -->
-<section class="section">
-  <p class="section-label">社内活用事例</p>
-  <h2 class="section-title">実際にこんな使い方をしています</h2>
-  <p class="section-desc">
-    専門的な知識は不要です。日本語で話しかけるだけで、こんなことができるようになりました。
-  </p>
-
-  <div class="case-list">
-
-    <!-- 事例① -->
-    <div class="case-card">
-      <div class="case-num">1</div>
-      <div class="case-body">
-        <div class="case-title">定期納品管理システム</div>
-        <span class="case-time">毎日1〜2時間 → 約3分</span>
-        <div class="case-compare">
-          <div class="case-before">エクセルでカレンダーを手作成し、1件ずつ通販天国へ入力していた</div>
-          <div class="case-arrow">→</div>
-          <div class="case-after">顧客マスタに条件を入力するだけでカレンダーが自動生成。発注予定表をコピペして完了</div>
-        </div>
-        <div class="case-result">20〜80件の注文管理がコピペ1回で完了するようになりました。</div>
-      </div>
-      <a href="https://docs.google.com/spreadsheets/d/1WASLncj6e5C4fFq9vFxxiBK25X-IvXjyo51zW8zA2vY/edit?usp=sharing" target="_blank" class="case-link">📊 制作物を見る</a>
-    </div>
-
-    <!-- 事例② -->
-    <div class="case-card">
-      <div class="case-num">2</div>
-      <div class="case-body">
-        <div class="case-title">アポインターシフト管理</div>
-        <span class="case-time">毎日20〜30分 → 約3分</span>
-        <div class="case-compare">
-          <div class="case-before">18名がチャットワークで文章を送信 → 柳下さんがエクセルに手入力してPDF共有</div>
-          <div class="case-arrow">→</div>
-          <div class="case-after">18名がフォームでボタン選択するだけ。スプレッドシートに自動集約されるので共有も簡単</div>
-        </div>
-        <div class="case-result">入力する側も集計する側も、手間がかなり減りました。</div>
-      </div>
-      <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
-        <a href="https://forms.gle/BvvpLuqUgPP89GRJ9" target="_blank" class="case-link">📋 入力フォーム</a>
-        <a href="https://docs.google.com/spreadsheets/d/11KsamnPObho-yUJRulufnssjoyv9zGGkKPKkGJh11G4/edit?usp=sharing" target="_blank" class="case-link">📊 管理表を見る</a>
-      </div>
-    </div>
-
-    <!-- 事例③ -->
-    <div class="case-card">
-      <div class="case-num">3</div>
-      <div class="case-body">
-        <div class="case-title">アポインター実績ダッシュボード</div>
-        <span class="case-time">月3時間 → 約3分</span>
-        <div class="case-compare">
-          <div class="case-before">セールスフォースのデータを島田さんがアポインターごとに手入力していた</div>
-          <div class="case-arrow">→</div>
-          <div class="case-after">データをコピペするだけで、目標対比・ランキングが自動で更新される</div>
-        </div>
-        <div class="case-result">各アポインターの実績が見える化され、その日のトップもわかるようになりました。</div>
-      </div>
-      <a href="https://docs.google.com/spreadsheets/d/1ZeI0cNS_0BXC9jnWShGaJxhouxAq5suxFm947Lm_Q10/edit?usp=sharing" target="_blank" class="case-link">📊 制作物を見る</a>
-    </div>
-
-    <!-- 事例④ -->
-    <div class="case-card">
-      <div class="case-num">4</div>
-      <div class="case-body">
-        <div class="case-title">小口現金処理システム</div>
-        <span class="case-time">都度20分〜1時間 → 最大5分</span>
-        <div class="case-compare">
-          <div class="case-before">領収書を見ながら出納帳を手作成し、枚数分の振替伝票を1枚ずつ手入力</div>
-          <div class="case-arrow">→</div>
-          <div class="case-after">領収書を撮影してスプレッドシートに取り込み、確認後にボタン1つで完成</div>
-        </div>
-        <div class="case-result">転記ミスなどのヒューマンエラーも防げるようになりました。</div>
-      </div>
-      <a href="https://docs.google.com/spreadsheets/d/1sYwkxeaOiVanhy_iZrHnyqjkyemE9fl8uRsdnbi3n8w/edit?usp=sharing" target="_blank" class="case-link">📊 制作物を見る</a>
-    </div>
-
-    <!-- 事例⑤ -->
-    <div class="case-card">
-      <div class="case-num">5</div>
-      <div class="case-body">
-        <div class="case-title">関東エリア お米市場価格調査レポート</div>
-        <span class="case-time">調査・集計・資料作成が一括で完了</span>
-        <div class="case-compare">
-          <div class="case-before">各スーパーのチラシや価格を手作業で調べ、エクセルにまとめて資料化していた</div>
-          <div class="case-arrow">→</div>
-          <div class="case-after">「関東エリアのお米市場価格を調べてWord・Excelレポートにまとめて」と伝えるだけで完成</div>
-        </div>
-        <div class="case-result">銘柄別の価格比較・相場分析・戦略提言まで含むレポートが自動で作成されます。</div>
-      </div>
-      <a href="https://docs.google.com/document/d/1kdEUSdQEDYV4TWyiO3LGk5RXN9Ke96NP/edit?usp=sharing" target="_blank" class="case-link">📄 レポートを見る</a>
-    </div>
-
+  <div class="hero-bg">
+    <img src="hero-violin.jpg" alt="ウイスキー樽の上に置かれたミズナラバイオリン"
+         onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?w=1600&q=80';">
   </div>
+  <div class="hero-content">
+    <div class="hero-mark"></div>
+    <div class="hero-jp-small">伝統と革新の融合</div>
+    <h1 class="hero-en">
+      Mizunara<br>
+      <span class="accent">Violin</span>
+    </h1>
+    <div class="hero-jp">水 楢 の 響 き</div>
+    <div class="hero-tagline">— A Japanese Soul, Resonating —</div>
+  </div>
+  <div class="scroll-indicator">SCROLL</div>
 </section>
 
-<hr class="divider">
-
-<!-- Claude紹介 -->
-<section class="claude-section">
-  <div class="claude-inner">
-    <div class="claude-text">
-      <p class="section-label" style="margin-bottom:8px;">Claude（クロード）とは</p>
-      <h2>日本語で話しかけるだけで<br>動く、AIアシスタントです。</h2>
-      <p>
-        Anthropic社が開発した次世代AIです。<br>
-        文章を書く、資料をまとめる、表を作る、計算する——<br>
-        普通の日本語で指示するだけで対応してくれます。
-      </p>
-      <ul class="claude-features">
-        <li>メール・議事録・報告書の下書き作成</li>
-        <li>Excelの数式・マクロの作成サポート</li>
-        <li>資料・PDFの要約・分析</li>
-        <li>アイデア出し・企画のブレスト</li>
-        <li>市場調査レポートの自動作成</li>
-        <li>スプレッドシートや管理ツールの構築</li>
-      </ul>
-      <a href="https://claude.ai" target="_blank" class="claude-btn">無料で試してみる →</a>
-      <p class="claude-btn-note">登録1分・クレジットカード不要・まず無料プランで十分です</p>
-    </div>
-    <div class="claude-visual">
-      <div class="chat-label right">あなた</div>
-      <div class="chat-bubble user">
-        「今月の小口現金の出納帳を作って。領収書の内容はこれです」
+<section class="story fade-in" id="story">
+  <div class="container">
+    <div class="story-grid">
+      <div class="story-text">
+        <div class="section-label">OUR STORY</div>
+        <h2 class="section-title">
+          日本の樹から、<br>世界へ響く音を。
+          <span class="en">— From a Japanese Forest to the World —</span>
+        </h2>
+        <p>ミズナラ。それは、日本の冷涼な山地に静かに育つ、希少な木材。何百年もの時をかけて緻密な木目を刻み、ジャパニーズウイスキーの熟成樽として世界の愛好家を魅了してきました。</p>
+        <p>その「日本の音」を奏でる木材としての可能性に光をあて、誰も挑んだことのない領域へ──ヴァイオリンという楽器に、ミズナラを宿らせる。それが私たちのプロジェクトです。</p>
+        <p>一流の素材、一流の職人、一流の演奏家。三つの「一流」が交差するとき、伝統工芸は革新へと姿を変え、日本の文化は世界へと響き渡ります。</p>
       </div>
-      <div style="height:10px;"></div>
-      <div class="chat-label">Claude</div>
-      <div class="chat-bubble">
-        承知しました。以下の内容で出納帳を作成しました。<br>
-        あわせて振替伝票も自動生成しています。<br>
-        内容を確認の上、ご利用ください。
-      </div>
-      <div style="height:10px;"></div>
-      <div class="chat-label right">あなた</div>
-      <div class="chat-bubble user">
-        「関東エリアのお米の市場価格をまとめたレポートを作って」
-      </div>
-      <div style="height:10px;"></div>
-      <div class="chat-label">Claude</div>
-      <div class="chat-bubble">
-        銘柄別の価格比較・相場トレンド・戦略提言を含むWordレポートとExcel集計表を作成しました。
+      <div class="story-visual">
+        <img src="hero-violin.jpg" alt="ウイスキー樽とミズナラバイオリン"
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1612225330812-01a9c6b355ec?w=900&q=80';">
       </div>
     </div>
   </div>
 </section>
 
-<!-- フッターメモ -->
-<section class="footer-note">
-  <p>
-    このページは皆さんへの情報共有として作成しました。<br>
-    「こういう使い方もあるんだ」と感じてもらえれば嬉しいです。
-  </p>
-  <p>
-    もし気になった方は、まず無料プランで試してみてください。<br>
-    ご質問があればお気軽に声をかけてください。
-  </p>
-  <p style="margin-top:16px; font-size:12px; color:var(--text-light);">
-    ※ このページ・メール・各スプレッドシートはすべて Claude（クロード）を使って作成しました。
-  </p>
+<section class="mizunara fade-in" id="mizunara">
+  <div class="container">
+    <div class="section-label">ABOUT MIZUNARA</div>
+    <h2 class="section-title">
+      希少にして、唯一無二。
+      <span class="en">— The Rarity of Japanese Oak —</span>
+    </h2>
+    <p style="max-width: 700px; color: var(--text); line-height: 2;">
+      ミズナラ（Quercus crispula）は、日本特有のオーク。北海道から九州の冷涼な山地に自生し、伐採可能な大きさに育つまで、数十年から数百年の歳月を要します。その希少性と特性は、世界の楽器愛好家を魅了する条件を備えています。
+    </p>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-num">01 / HARDNESS</div>
+        <h3 class="feature-title">硬さと耐久性</h3>
+        <p class="feature-desc">非常に硬く、密度の高い木質。繊細な楽器構造を支え、長期にわたって音響特性を保ち続ける、ヴァイオリン製作に理想的な物性を持ちます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">02 / GRAIN</div>
+        <h3 class="feature-title">独特の木目</h3>
+        <p class="feature-desc">緻密で美しい木目模様は、他の木材には見られない個性を放ちます。一本一本が違う表情を持ち、楽器に唯一無二の佇まいを与えます。</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-num">03 / AROMA</div>
+        <h3 class="feature-title">バニラの芳香</h3>
+        <p class="feature-desc">バニラ、ココナッツ、サンダルウッドを思わせる独特の芳香成分。ウイスキー文化を支えるその香気は、楽器に静かな存在感を添えます。</p>
+      </div>
+    </div>
+  </div>
 </section>
 
-<footer class="footer">
-  <p>© 2026 株式会社アスク　フードリカバリー研究室　室長　植田 全紀</p>
+<section class="stats fade-in">
+  <div class="stats-grid">
+    <div class="stat-item">
+      <div class="stat-num">200<span class="unit">年</span></div>
+      <div class="stat-label">GROWTH PERIOD</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">1<span class="unit">本</span></div>
+      <div class="stat-label">ONE OF A KIND</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">3<span class="unit">流</span></div>
+      <div class="stat-label">MATERIAL · CRAFT · MUSIC</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">∞</div>
+      <div class="stat-label">RESONANCE</div>
+    </div>
+  </div>
+</section>
+
+<section class="process fade-in" id="process">
+  <div class="container">
+    <div class="section-label">PROCESS</div>
+    <h2 class="section-title">
+      五つの工程、唯一の響き。
+      <span class="en">— Five Stages, One Resonance —</span>
+    </h2>
+    <div class="process-list">
+      <div class="process-item">
+        <div class="process-num">01</div>
+        <div><div class="process-name">木材の選定<span class="en">Selection</span></div></div>
+        <div class="process-desc">専門家がミズナラの密度、均一性、木目を厳格にチェック。選定された木材は適切な湿度と温度のもとで十分に乾燥させ、収縮やひび割れを防ぎながら最良の状態へと整えていきます。</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">02</div>
+        <div><div class="process-name">加工準備<span class="en">Preparation</span></div></div>
+        <div class="process-desc">バイオリンの各パーツに必要な寸法へ切り出し、ボディ・ネック・指板を成形。なかでもボディのアーチは音響特性に直結するため、職人が慎重に削り出していきます。</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">03</div>
+        <div><div class="process-name">組み立て<span class="en">Assembly</span></div></div>
+        <div class="process-desc">表板と裏板を接着し、側板を取り付け、ネックと指板を結合。接着には伝統的な動物性接着剤を使用し、将来の修理にも対応できる構造を保ちます。</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">04</div>
+        <div><div class="process-name">仕上げ<span class="en">Finishing</span></div></div>
+        <div class="process-desc">ニスを薄く何層にも塗り重ね、光沢と耐久性を与えます。ニスは音の響きにも影響するため、職人の判断のもと回数と厚みが調整されます。</div>
+      </div>
+      <div class="process-item">
+        <div class="process-num">05</div>
+        <div><div class="process-name">完成<span class="en">Completion</span></div></div>
+        <div class="process-desc">ペグ、ブリッジ、テールピースを取り付けて弦を張り、音響調整を経て完成。専門家による厳格な品質チェックの後、保護ケースに収められ、奏者の元へと届けられます。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="producer fade-in" id="producer">
+  <div class="container">
+    <div class="section-label">PRODUCER</div>
+    <h2 class="section-title">
+      演奏家が、選んだ素材。
+      <span class="en">— Curated by a Violinist —</span>
+    </h2>
+    <div class="producer-grid">
+      <div class="producer-image">
+        <img src="producer-mashiko.jpg" alt="ヴァイオリニスト 益子侑"
+             onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1465847899084-d164df4dedc6?w=1200&q=80';">
+      </div>
+      <div>
+        <div class="producer-role">VIOLINIST / PRODUCER</div>
+        <div class="producer-name">Yu Mashiko</div>
+        <div class="producer-name-jp">益 子 侑</div>
+        <div class="producer-bio">
+          <p>3歳よりヴァイオリンを始め、元NHK交響楽団コンサートマスター 田中千香士氏、イ・ムジチ合奏団コンサートマスター フェデリコ・アゴスティーニ氏のもとで研鑽を積む。東京音楽大学付属高等学校、東京音楽大学卒業。</p>
+          <p>大学在学中よりTV・ライブ・レコーディングにて、エンヤ、The Platters、松田聖子、北島三郎、KinKi Kids、SMAP、福山雅治、サザンオールスターズ、平井堅、初音ミクなど、ジャンルを越えて様々なアーティストと共演。</p>
+          <p>「益子侑ストリングス」「ステラ・オーケストラ」を主宰し、サントリーホール公演や東京芸術劇場復興支援コンサートなどをプロデュース。一流の演奏家として、日本のミズナラに新たな命を吹き込むプロジェクトを牽引する。</p>
+        </div>
+        <div class="producer-credentials">
+          <div class="credential-item">
+            <div class="credential-label">EDUCATION</div>
+            東京音楽大学 卒業
+          </div>
+          <div class="credential-item">
+            <div class="credential-label">AFFILIATION</div>
+            一般社団法人 世界音育協会
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="voices fade-in" id="voices">
+  <div class="container">
+    <div class="section-label">VOICES</div>
+    <h2 class="section-title">
+      ミズナラに、命を吹き込んだ人々。
+      <span class="en">— The Voices Behind the Resonance —</span>
+    </h2>
+    <p class="voices-intro">
+      ミズナラバイオリンは、一人の手では生まれません。素材を見極める者、木に向き合う者、音を引き出す者──プロジェクトに関わった人々の声を、それぞれの言葉でお届けします。
+    </p>
+    <div class="video-grid">
+      <div class="video-item">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/OQIkFcFhQ6s" title="VOICE 01"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="video-meta">
+          <div class="video-num">VOICE 01</div>
+          <div class="video-title">プロジェクトに寄せて</div>
+          <div class="video-sub">— Behind the Mizunara Violin —</div>
+          <a href="https://youtu.be/OQIkFcFhQ6s" target="_blank" rel="noopener" class="video-link">WATCH ON YOUTUBE</a>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/t8ecRZ6fw_w" title="VOICE 02"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="video-meta">
+          <div class="video-num">VOICE 02</div>
+          <div class="video-title">素材と向き合うということ</div>
+          <div class="video-sub">— Facing the Material —</div>
+          <a href="https://youtu.be/t8ecRZ6fw_w" target="_blank" rel="noopener" class="video-link">WATCH ON YOUTUBE</a>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/M0ZA1r-l358" title="VOICE 03"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="video-meta">
+          <div class="video-num">VOICE 03</div>
+          <div class="video-title">木が楽器に変わる瞬間</div>
+          <div class="video-sub">— The Moment Wood Becomes Music —</div>
+          <a href="https://youtu.be/M0ZA1r-l358" target="_blank" rel="noopener" class="video-link">WATCH ON YOUTUBE</a>
+        </div>
+      </div>
+      <div class="video-item">
+        <div class="video-frame">
+          <iframe src="https://www.youtube.com/embed/hT6SY-UE9_8" title="VOICE 04"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+        </div>
+        <div class="video-meta">
+          <div class="video-num">VOICE 04</div>
+          <div class="video-title">日本の音を、世界へ</div>
+          <div class="video-sub">— Resonating to the World —</div>
+          <a href="https://youtu.be/hT6SY-UE9_8" target="_blank" rel="noopener" class="video-link">WATCH ON YOUTUBE</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact fade-in" id="contact">
+  <div class="container">
+    <div class="section-label" style="justify-content: center;">CONTACT</div>
+    <h2 class="section-title" style="text-align: center;">
+      ミズナラの響きに、触れる。
+      <span class="en">— Experience the Sound of Mizunara —</span>
+    </h2>
+    <p class="contact-message">
+      取材・試奏のご依頼、演奏会のご相談、プロジェクトへのご支援など、ミズナラバイオリンに関するお問い合わせを承っております。お気軽にご連絡ください。
+    </p>
+    <a href="mailto:info@mizunara-violin.jp" class="contact-button">INQUIRE</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-logo">MIZUNARA VIOLIN</div>
+  <div class="footer-org">一般社団法人 世界音育協会</div>
+  <div class="footer-copy">© 2026 MIZUNARA VIOLIN PROJECT. ALL RIGHTS RESERVED.</div>
 </footer>
 
 <script>
-  // Google Sites iframe 高さ自動調整
-  // ページの実際の高さを親フレームに通知し、白い余白を解消します
-  function notifyHeight() {
-    var h = document.documentElement.scrollHeight || document.body.scrollHeight;
-    // Google Sites が受け付ける postMessage 形式
-    window.parent.postMessage({ type: 'resize', height: h }, '*');
-    // 念のため両方の形式で送信
-    window.parent.postMessage(JSON.stringify({ sentinel: 'amp', type: 'embed-size', height: h }), '*');
-  }
-
-  // 読み込み完了後に通知
-  window.addEventListener('load', function() {
-    notifyHeight();
-    // フォント等の遅延読み込み後にも再通知
-    setTimeout(notifyHeight, 500);
-    setTimeout(notifyHeight, 1500);
-  });
-
-  // コンテンツが変化したときも通知（ResizeObserver）
-  if (window.ResizeObserver) {
-    var ro = new ResizeObserver(notifyHeight);
-    ro.observe(document.body);
-  }
-
-  // 定期的にも通知（フォールバック）
-  setInterval(notifyHeight, 1000);
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
